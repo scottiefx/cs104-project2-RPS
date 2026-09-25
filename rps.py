@@ -4,12 +4,12 @@ rps.py
 Redistributed and modified with permission from the
 EECS Department at The University of Michigan, Ann Arbor
 
-Name: TO FILL IN (your name)
+Name: Faron Matthews (scottie)
 
 CS 104: Project 2
 FALL 2026
 
-Description: TO FILL IN (one or two sentences about what this program does)
+Description: a rock-paper-scissors game between two players
 """
 
 # ***********************************************************************
@@ -80,7 +80,7 @@ QUIT_CHOICE = 3
 # a short docstring (one or two lines is fine).
 # ***********************************************************************
 
-# get_name(player_number)
+# get_name(player_number) - DONE!!!!!!!!!!!!!!!
 #
 # Purpose:     Prompts the user to enter their name. Names entered may
 #              have spaces within them.
@@ -221,11 +221,26 @@ def rps():
 # ***********************************************************************
 
 def is_move_good(move):
-    """TO FILL IN: describe what this function does in one line."""
-    # TODO: implement
+    #checks if move is valid ; T/F
+    valids = ("R", "r", "P", "p", "S", "s")
+    if str(move) in valids:
+        return True
+    else:
+        return False
 
-    # NOTE: replace this return statement!!!
-    return True
+def get_name(player_number):
+#gets name for a player (PLAYER_1 or PLAYER_2), returns as string
+    if player_number == PLAYER_1:
+        pname = str(input("Player 1, enter your name: "))
+        if pname.strip() == "":
+            print_error_message(ERROR_NAME)
+            pname = DEFAULT_NAME_1
+    elif player_number == PLAYER_2:
+        pname = str(input("Player 2, enter your name: "))
+        if pname_strip() == "":
+            print_error_message(ERROR_NAME)
+            pname = DEFAULT_NAME_2
+    return str(pname)
 
 
 # ***********************************************************************

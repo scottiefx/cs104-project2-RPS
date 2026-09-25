@@ -34,3 +34,6 @@ The game is broken into small functions for input handling, move validation, sco
 ## 🛠️ Built with
 
 - Python 3
+
+## note
+hii
