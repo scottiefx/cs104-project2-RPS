@@ -241,13 +241,17 @@ def get_menu_choice():
 # prints menu then returns user choice as an int (1-3)
 # invalid input reloads menu and displays error
     print_menu()
-    choice = int(input())
-    while 0 < choice > 3:
+    choice = input()
+    if not choice.isdigit():
+        choice = 4
+    while 0 < int(choice) > 3:
         print("Invalid menu choice.")
         print_menu()
-        choice = int(input())
+        choice = input()
+        if not choice.isdigit():
+            choice = 4
     else:
-        return choice
+        return int(choice)
 
 def get_move(player_name):
     #gets input of move for designated player, returns string as written unless invalid
@@ -418,18 +422,25 @@ def rps():
     # Gets names for both players
     p1_name = get_name(PLAYER_1)
     p2_name = get_name(PLAYER_2)
-    # Displays menu, gets gametype
-    gamemode = get_menu_choice()
-    if gamemode == 1:
-        gamemode = PLAY_RPS
-    elif gamemode == 2:
-        gamemode = PLAY_RPSLS
-    elif gamemode == 3:
-        # Ends function if user quits through the menu
-        gamemode == QUIT_CHOICE
-        return
-    winner = do_game(p1_name, p2_name, gamemode)
-    announce_winner(winner)
-    print_closer()
+
+    #determines if the players are continuing their session
+    #if quit is selected, end this loop and the function
+    playing = True
+    while playing:
+        # Displays menu, gets gametype, runs game
+        gamemode = get_menu_choice()
+        if gamemode == 1:
+            gamemode = PLAY_RPS
+        elif gamemode == 2:
+            gamemode = PLAY_RPSLS
+        elif gamemode == 3:
+            # Ends function if user quits through the menu
+            gamemode == QUIT_CHOICE
+            print_closer()
+            playing = False
+            return
+        winner = do_game(p1_name, p2_name, gamemode)
+        if gamemode != PLAY_RPSLS:
+            announce_winner(winner)
     
 rps()
