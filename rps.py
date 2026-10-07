@@ -160,7 +160,7 @@ QUIT_CHOICE = 3
 #              [winner_name] wins the round!
 #
 #
-# do_round(p1_name, p2_name)
+# do_round(p1_name, p2_name) DOOONEEEEEEEEEEEEEEEEEEEEEEEEEEEEe
 #
 # Purpose:     Simulates a complete round of rock, paper, scissors,
 #              which consists of three steps:
@@ -173,7 +173,7 @@ QUIT_CHOICE = 3
 # Returns:     DRAW (0), PLAYER_1 (1) or PLAYER_2 (2)
 #
 #
-# announce_winner(winner_name)
+# announce_winner(winner_name) -- DOOONEE
 #
 # Purpose:     If winner_name is empty, prints that there was no winner.
 #              Otherwise, prints a congratulatory message to the winner.
@@ -185,7 +185,7 @@ QUIT_CHOICE = 3
 #              (use COURSE_NAME for "CS 104")
 #
 #
-# do_game(p1_name, p2_name, game_type)
+# do_game(p1_name, p2_name, game_type) - DONE.
 #
 # Base Project:
 # Purpose:     If game_type is PLAY_RPSLS, prints "Under Construction"
@@ -306,21 +306,55 @@ def announce_round_winner(winner_name):
     else:
         print(f"{winner_name} wins the round!")
 
-# do_round(p1_name, p2_name)
-#
-# Purpose:     Simulates a complete round of rock, paper, scissors,
-#              which consists of three steps:
-#                1. Get player 1's move
-#                2. Get player 2's move
-#                3. Return DRAW if the round was a draw; PLAYER_1 if
-#                   player 1 won; PLAYER_2 if player 2 won.
-#              It does not announce anything. do_game does that.
-# Parameters:  p1_name and p2_name - the names of the respective players
-# Returns:     DRAW (0), PLAYER_1 (1) or PLAYER_2 (2)
 def do_round(p1_name, p2_name):
-    
+    # goes through the necessary logic for an RPS round
+    # asks each player for a move
+    # compares the moves and returns a value for the winner
+    # DRAW = 0, PLAYER_1 = 1, PLAYER_2 = 2
+    p1_move = get_move(p1_name)
+    p2_move = get_move(p2_name)
+    p1_wins = is_round_winner(p1_move, p2_move)
+    p2_wins = is_round_winner(p2_move, p1_move)
+    if p1_wins == True:
+        return PLAYER_1
+    elif p2_wins == True:
+        return PLAYER_2
+    else:
+        return DRAW
 
+def announce_winner(winner_name):
+    # Congratulates winner of game
+    # Prints "No winner" if input is empty string
+    if winner_name == "":
+        print("No winner!")
+    else:
+        print(f"Congratulations {winner_name}!\nYou won {COURSE_NAME} Rock, Paper, Scissors!")
 
+def do_game(p1_name, p2_name, game_type):
+    # runs a game of RPS.
+    # returns the name of the winner in a string, empty if no winner.
+    if game_type == PLAY_RPSLS:
+        print("Under Construction")
+        return ""
+    else:
+        p1_score = 0
+        p2_score = 0
+        for i in range(MAX_ROUNDS):
+            roundresult = do_round(p1_name, p2_name)
+            if roundresult == PLAYER_1:
+                p1_score += 1
+                announce_round_winner(p1_name)
+            elif roundresult == PLAYER_2:
+                p2_score += 1
+                announce_round_winner(p2_name)
+            elif roundresult == DRAW:
+                announce_round_winner("")
+        winner_name = ""
+        if p1_score > p2_score:
+            winner_name = p1_name
+        elif p2_score > p1_score:
+            winner_name = p2_name
+        return winner_name
 
 # ***********************************************************************
 # DO NOT modify the four functions below.
