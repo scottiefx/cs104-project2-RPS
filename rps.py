@@ -207,12 +207,7 @@ QUIT_CHOICE = 3
 # Prompt:      Under Construction
 
 
-def rps():
-    """
-    Purpose: Runs the whole program. Write this function LAST.
-    """
-    # TODO: implement
-    pass
+
 
 
 # ***********************************************************************
@@ -237,7 +232,7 @@ def get_name(player_number):
             pname = DEFAULT_NAME_1
     elif player_number == PLAYER_2:
         pname = str(input("Player 2, enter your name: "))
-        if pname_strip() == "":
+        if pname.strip() == "":
             print_error_message(ERROR_NAME)
             pname = DEFAULT_NAME_2
     return str(pname)
@@ -326,8 +321,10 @@ def announce_winner(winner_name):
     # Congratulates winner of game
     # Prints "No winner" if input is empty string
     if winner_name == "":
+        print()
         print("No winner!")
     else:
+        print()
         print(f"Congratulations {winner_name}!\nYou won {COURSE_NAME} Rock, Paper, Scissors!")
 
 def do_game(p1_name, p2_name, game_type):
@@ -398,3 +395,41 @@ def print_closer():
     print("           Thanks for playing")
     print("          Rock, Paper, Scissors!")
     print("----------------------------------------")
+
+"""
+Available Funcs:
+print_initial_header
+print_closer
+print_error_message
+print_menu
+is_move_good
+get_name
+get_menu_choice
+get_move
+is_round_winner
+announce_round_winner
+do_round
+announce_winner
+do_game
+"""
+def rps():
+    # Runs the whole program.
+    print_initial_header()
+    # Gets names for both players
+    p1_name = get_name(PLAYER_1)
+    p2_name = get_name(PLAYER_2)
+    # Displays menu, gets gametype
+    gamemode = get_menu_choice()
+    if gamemode == 1:
+        gamemode = PLAY_RPS
+    elif gamemode == 2:
+        gamemode = PLAY_RPSLS
+    elif gamemode == 3:
+        # Ends function if user quits through the menu
+        gamemode == QUIT_CHOICE
+        return
+    winner = do_game(p1_name, p2_name, gamemode)
+    announce_winner(winner)
+    print_closer()
+    
+rps()
