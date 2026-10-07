@@ -442,5 +442,3 @@ def rps():
         winner = do_game(p1_name, p2_name, gamemode)
         if gamemode != PLAY_RPSLS:
             announce_winner(winner)
-    
-rps()
