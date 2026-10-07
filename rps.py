@@ -97,7 +97,7 @@ QUIT_CHOICE = 3
 # Prompt:      Player 1, enter your name:   (Player 2 for the second)
 #
 #
-# get_menu_choice()
+# get_menu_choice() - Done!!!!!!!!!!!!!
 #
 # Purpose:     Prints the menu, and reads the input from the user.
 #              Checks to make sure the input is within range for the
@@ -113,7 +113,7 @@ QUIT_CHOICE = 3
 #              it to an int once you know it is valid.
 #
 #
-# is_move_good(move)
+# is_move_good(move) done!!!!!!!!!!!!!!
 #
 # Purpose:     Checks for valid move. Returns True if and only if move
 #              represents a valid move: one of "R", "r", "P", "p", "S",
@@ -123,7 +123,7 @@ QUIT_CHOICE = 3
 # Returns:     True or False
 #
 #
-# get_move(player_name)
+# get_move(player_name) dome ! q!
 #
 # Purpose:     Prompts the player for their move and returns it. If an
 #              illegal move is entered, call print_error_message with
@@ -136,7 +136,7 @@ QUIT_CHOICE = 3
 # Prompt:      [player_name], enter your move:
 #
 #
-# is_round_winner(move, opponent_move)
+# is_round_winner(move, opponent_move) ODone!!!!!!!!!!!
 #
 # Purpose:     Returns True if and only if the player who made move won
 #              according to the rules of Rock, Paper, Scissors. Returns
@@ -147,7 +147,7 @@ QUIT_CHOICE = 3
 # Returns:     True or False
 #
 #
-# announce_round_winner(winner_name)
+# announce_round_winner(winner_name) - DONEE!!!!
 #
 # Purpose:     If winner_name is empty, prints a message indicating the
 #              round is a draw. Otherwise, prints a congratulatory
@@ -241,6 +241,85 @@ def get_name(player_number):
             print_error_message(ERROR_NAME)
             pname = DEFAULT_NAME_2
     return str(pname)
+
+def get_menu_choice():
+# prints menu then returns user choice as an int (1-3)
+# invalid input reloads menu and displays error
+    print_menu()
+    choice = int(input())
+    while 0 < choice > 3:
+        print("Invalid menu choice.")
+        print_menu()
+        choice = int(input())
+    else:
+        return choice
+
+def get_move(player_name):
+    #gets input of move for designated player, returns string as written unless invalid
+    move = input(f"{player_name}, enter your move: ")
+    if is_move_good(move) == False:
+        print_error_message(ERROR_MOVE)
+        move = DEFAULT_MOVE
+    return move
+
+def is_round_winner(move, opponent_move):
+    # Evaluates if a move wins the round compared to the opponent's move using RPS logic
+    # Turns moves Lowercase
+    # can remove move validation if it turns out unused
+    winner = False
+    if is_move_good(move) == False:
+        print_error_message(ERROR_MOVE)
+        move = DEFAULT_MOVE
+    if is_move_good(opponent_move) == False:
+        print_error_message(ERROR_MOVE)
+        opponent_move = DEFAULT_MOVE
+    move = move.lower()
+    opponent_move = opponent_move.lower()
+    if move == ROCK:
+        if opponent_move == ROCK:
+            winner = False
+        elif opponent_move == PAPER:
+            winner = False
+        elif opponent_move == SCISSORS:
+            winner = True
+    elif move == PAPER:
+        if opponent_move == ROCK:
+            winner = True
+        elif opponent_move == PAPER:
+            winner = False
+        elif opponent_move == SCISSORS:
+            winner = False
+    elif move == SCISSORS:
+        if opponent_move == ROCK:
+            winner = False
+        elif opponent_move == PAPER:
+            winner = True
+        elif opponent_move == SCISSORS:
+            winner = False
+    return winner
+
+def announce_round_winner(winner_name):
+    # Congratulates the winner of the round
+    # if name is an empty string, calls a draw
+    if winner_name == "":
+        print("This round is a draw!")
+    else:
+        print(f"{winner_name} wins the round!")
+
+# do_round(p1_name, p2_name)
+#
+# Purpose:     Simulates a complete round of rock, paper, scissors,
+#              which consists of three steps:
+#                1. Get player 1's move
+#                2. Get player 2's move
+#                3. Return DRAW if the round was a draw; PLAYER_1 if
+#                   player 1 won; PLAYER_2 if player 2 won.
+#              It does not announce anything. do_game does that.
+# Parameters:  p1_name and p2_name - the names of the respective players
+# Returns:     DRAW (0), PLAYER_1 (1) or PLAYER_2 (2)
+def do_round(p1_name, p2_name):
+    
+
 
 
 # ***********************************************************************
